@@ -1,6 +1,6 @@
 .ChipsWrapper {
-    max-width: 900px;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex: 0 0 auto;
+    gap: 10px;
 }

@@ -5,7 +5,8 @@
 }
 
 .app {
-    width: 100%;
     display: flex;
-    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: red;
 }
