@@ -13,7 +13,7 @@ interface PopupProps {
 }
 
 const Popup = (props: PopupProps) => {
-    const { gridColumns = 2, className, trigger, children, placement = "bottom" } = props;
+    const { gridColumns = 2, className, trigger, children, placement = "bottom-start" } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
     const referenceElement = useRef<HTMLDivElement>(null);

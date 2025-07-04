@@ -3,15 +3,16 @@ import cls from "./Chips.module.scss";
 
 interface ChipsProps {
     label: string;
-    selected: boolean;
-    onClick: () => void;
+    selected?: boolean;
+    onClick?: () => void;
     className?: string;
     width?: number;
 }
 
 const Chips = (props: ChipsProps) => {
-    const { label, selected, onClick, className, width = 100 } = props;
+    const { label, selected = false, onClick, className, width = 100 } = props;
     const style = { width: `${width}px` };
+
     return (
         <div
             className={classNames(cls.Chip, { [cls.selected]: selected }, [className])}
