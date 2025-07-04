@@ -1,13 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { usePopper } from "react-popper";
 import Chips from "components/Chips/Chips";
 import { classNames } from "utils/classNames";
 import cls from "./ChipsList.module.scss";
 import Popup from "components/Popup/Popup";
 import { Button } from "components/Button/Button";
 
+export type ChipsType = {
+    id: string;
+    label: string;
+};
+
 interface ChipListProps {
-    chips: { id: string; label: string }[];
+    chips: ChipsType[];
     selectedId: string | null;
     onSelect: (id: string) => void;
     chipsWidth?: number;
@@ -19,25 +23,12 @@ const ChipList = (props: ChipListProps) => {
     const [visibleCount, setVisibleCount] = useState(chips.length);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-    const ellipsisRef = useRef<HTMLDivElement>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-    const { styles, attributes } = usePopper(ellipsisRef.current, popperElement, {
-        placement: "bottom-start",
-    });
 
     const calculateVisibleCount = () => {
         if (!containerRef.current) return;
         const containerWidth = containerRef.current.offsetWidth;
-        let totalWidth = 0;
-        let count = 0;
         const ellipsisWidth = 32;
-
-        chips.forEach((chip) => {
-            if (totalWidth + chipsWidth <= containerWidth - ellipsisWidth) {
-                totalWidth += chipsWidth;
-                count++;
-            }
-        });
+        const count = (containerWidth - ellipsisWidth) / chipsWidth;
 
         setVisibleCount(count < chips.length ? count : chips.length);
     };
@@ -65,6 +56,7 @@ const ChipList = (props: ChipListProps) => {
             <Popup
                 trigger={<Button className={cls.popupButton}>...</Button>}
                 onClose={() => setIsPopupOpen(false)}
+                placement="bottom-start"
             >
                 {hiddenChips.map((chip) => (
                     <Chips

@@ -1,19 +1,20 @@
 import { useState } from "react";
-import ChipList from "components/ChipsList/ChipsList";
+import ChipList, { ChipsType } from "components/ChipsList/ChipsList";
 import "./index.scss";
 
 const chips = [
-    { id: "1", label: "Chip 11" },
-    { id: "2", label: "Chip 2" },
-    { id: "3", label: "Chip 3" },
-    { id: "4", label: "Chip 4" },
-    { id: "5", label: "Chip 5" },
-    { id: "6", label: "Chip 6" },
-    { id: "7", label: "Chip 7" },
-    { id: "8", label: "Chip 8" },
-    { id: "9", label: "Chip 9" },
-    { id: "10", label: "Chip 10" },
-    { id: "11", label: "Chip 11" },
+    { id: "1", label: "Чипс 111111111111111111" },
+    { id: "2", label: "Чипс 222222222222222222" },
+    { id: "3", label: "Чипс 333333333333333333" },
+    { id: "4", label: "Чипс 444444444444444444" },
+    { id: "5", label: "Чипс 5" },
+    { id: "6", label: "Чипс 6" },
+    { id: "7", label: "Чипс 7" },
+    { id: "8", label: "Чипс 8" },
+    { id: "9", label: "Чипс 9" },
+    { id: "10", label: "Чипс 10" },
+    { id: "11", label: "Чипс 11" },
+    { id: "12", label: "Чипс 12" },
 ];
 
 const App = () => {
