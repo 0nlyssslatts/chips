@@ -3,7 +3,7 @@ import ChipList from "components/ChipsList/ChipsList";
 import "./index.scss";
 
 const chips = [
-    { id: "1", label: "Chip 1" },
+    { id: "1", label: "Chip 1111111111111111111111" },
     { id: "2", label: "Chip 2" },
     { id: "3", label: "Chip 3" },
     { id: "4", label: "Chip 4" },

@@ -1,7 +1,7 @@
 .ChipsList {
     display: flex;
-    flex-shrink: 0;
-    align-items: center;
+    flex-direction: row;
+
     background-color: red;
 }
 

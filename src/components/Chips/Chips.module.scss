@@ -1,10 +1,19 @@
 .Chip {
     padding: 10px;
-    border-radius: 40%;
+    border-radius: 15px;
+    margin: 5px;
+    text-align: center;
     cursor: pointer;
     background-color: #fde4a1;
     color: #000;
-    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .selected {

@@ -32,7 +32,7 @@ const ChipList = (props: ChipListProps) => {
         const ellipsisWidth = 32;
 
         chips.forEach((chip) => {
-            const chipWidth = 75;
+            const chipWidth = 200;
             if (totalWidth + chipWidth <= containerWidth - ellipsisWidth) {
                 totalWidth += chipWidth;
                 count++;
@@ -59,6 +59,7 @@ const ChipList = (props: ChipListProps) => {
                     label={chip.label}
                     selected={selectedId === chip.id}
                     onClick={() => onSelect(chip.id)}
+                    width={200}
                 />
             ))}
             {hiddenChips.length > 0 && (

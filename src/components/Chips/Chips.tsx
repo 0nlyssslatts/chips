@@ -10,13 +10,14 @@ interface ChipsProps {
 }
 
 const Chips = (props: ChipsProps) => {
-    const { label, selected, onClick, className, width } = props;
-    const style = width ? { width: `${width}px` } : {};
+    const { label, selected, onClick, className, width = 100 } = props;
+    const style = { width: `${width}px` };
     return (
         <div
             className={classNames(cls.Chip, { [cls.selected]: selected }, [className])}
             onClick={onClick}
             style={style}
+            title={label}
         >
             {label}
         </div>
