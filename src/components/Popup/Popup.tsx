@@ -1,5 +1,5 @@
 import { useState, useRef, ReactNode } from "react";
-import PopperJS from "@popperjs/core";
+import { Placement } from "@popperjs/core/index";
 import { usePopper } from "react-popper";
 import { classNames } from "utils/classNames";
 import cls from "./Popup.module.scss";
@@ -9,7 +9,7 @@ interface PopupProps {
     gridColumns?: number;
     className?: string;
     children: ReactNode;
-    placement?: PopperJS.Placement;
+    placement?: Placement;
 }
 
 const Popup = (props: PopupProps) => {
