@@ -12,11 +12,11 @@
     transition: all 0.3s ease;
 
     &:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
     }
 }
 
 .selected {
-    background-color: #bca159;
+    background-color: #c99b1b;
     color: #fff;
 }

@@ -12,16 +12,14 @@ export type ChipsType = {
 
 interface ChipListProps {
     chips: ChipsType[];
-    selectedId: string | null;
-    onSelect: (id: string) => void;
     chipsWidth?: number;
     className?: string;
 }
 
 const ChipList = (props: ChipListProps) => {
-    const { chips, selectedId, onSelect, chipsWidth = 100, className } = props;
+    const { chips, chipsWidth = 100, className } = props;
+    const [selectedId, setSelectedId] = useState<string | null>(null);
     const [visibleCount, setVisibleCount] = useState(chips.length);
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
 
     const calculateVisibleCount = () => {
@@ -49,24 +47,25 @@ const ChipList = (props: ChipListProps) => {
                     key={chip.id}
                     label={chip.label}
                     selected={selectedId === chip.id}
-                    onClick={() => onSelect(chip.id)}
+                    onClick={() => setSelectedId(chip.id)}
                     width={chipsWidth}
                 />
             ))}
-            <Popup
-                trigger={<Button className={cls.popupButton}>...</Button>}
-                onClose={() => setIsPopupOpen(false)}
-                placement="bottom-start"
-            >
-                {hiddenChips.map((chip) => (
-                    <Chips
-                        key={chip.id}
-                        label={chip.label}
-                        selected={selectedId === chip.id}
-                        onClick={() => onSelect(chip.id)}
-                    />
-                ))}
-            </Popup>
+            {hiddenChips.length > 0 && (
+                <Popup
+                    trigger={<Button className={cls.popupButton}>...</Button>}
+                    placement="bottom-start"
+                >
+                    {hiddenChips.map((chip) => (
+                        <Chips
+                            key={chip.id}
+                            label={chip.label}
+                            selected={selectedId === chip.id}
+                            onClick={() => setSelectedId(chip.id)}
+                        />
+                    ))}
+                </Popup>
+            )}
         </div>
     );
 };

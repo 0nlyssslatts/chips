@@ -5,16 +5,15 @@ import { classNames } from "utils/classNames";
 import cls from "./Popup.module.scss";
 
 interface PopupProps {
+    trigger: ReactNode;
     gridColumns?: number;
     className?: string;
-    children?: ReactNode;
-    trigger: ReactNode;
-    onClose?: () => void;
+    children: ReactNode;
     placement?: PopperJS.Placement;
 }
 
 const Popup = (props: PopupProps) => {
-    const { gridColumns = 2, className, trigger, children, placement = "bottom", onClose } = props;
+    const { gridColumns = 2, className, trigger, children, placement = "bottom" } = props;
     const [isOpen, setIsOpen] = useState(false);
     const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
     const referenceElement = useRef<HTMLDivElement>(null);
@@ -22,11 +21,7 @@ const Popup = (props: PopupProps) => {
         placement,
     });
 
-    const handleToggle = () => setIsOpen(!isOpen);
-    const handleClosePopup = () => {
-        setIsOpen(false);
-        if (onClose) onClose();
-    };
+    const handleToggle = () => setIsOpen((prev) => !prev);
 
     return (
         <>
@@ -37,7 +32,6 @@ const Popup = (props: PopupProps) => {
                 <div
                     ref={setPopperElement}
                     className={classNames(cls.Popup, {}, [className])}
-                    onClick={handleClosePopup}
                     style={styles.popper}
                     {...attributes.popper}
                 >

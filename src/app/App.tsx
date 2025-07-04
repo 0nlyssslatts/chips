@@ -1,5 +1,4 @@
-import { useState } from "react";
-import ChipList, { ChipsType } from "components/ChipsList/ChipsList";
+import ChipList from "components/ChipsList/ChipsList";
 import "./index.scss";
 
 const chips = [
@@ -18,11 +17,9 @@ const chips = [
 ];
 
 const App = () => {
-    const [selectedId, setSelectedId] = useState<string | null>(null);
-
     return (
         <div className="app">
-            <ChipList chips={chips} selectedId={selectedId} onSelect={setSelectedId} />
+            <ChipList chips={chips} chipsWidth={120} />
         </div>
     );
 };
