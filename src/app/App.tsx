@@ -1,10 +1,10 @@
 import "./index.scss";
-import { ChipsWrapper } from "components/ChipsWrapper/ChipsWrapper";
+import Chips from "components/Chips/Chips";
 
 const App = () => {
     return (
         <div className="app">
-            <ChipsWrapper />
+            <Chips label="Chips" selected={false} onClick={() => {}} />
         </div>
     );
 };
