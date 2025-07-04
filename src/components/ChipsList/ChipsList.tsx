@@ -3,18 +3,19 @@ import { usePopper } from "react-popper";
 import Chips from "components/Chips/Chips";
 import { classNames } from "utils/classNames";
 import cls from "./ChipsList.module.scss";
+import Popup from "components/Popup/Popup";
+import { Button } from "components/Button/Button";
 
 interface ChipListProps {
     chips: { id: string; label: string }[];
     selectedId: string | null;
     onSelect: (id: string) => void;
+    chipsWidth?: number;
     className?: string;
-    popupClassName?: string;
-    gridColumns?: number;
 }
 
 const ChipList = (props: ChipListProps) => {
-    const { chips, selectedId, onSelect, className, popupClassName, gridColumns = 3 } = props;
+    const { chips, selectedId, onSelect, chipsWidth = 100, className } = props;
     const [visibleCount, setVisibleCount] = useState(chips.length);
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -32,9 +33,8 @@ const ChipList = (props: ChipListProps) => {
         const ellipsisWidth = 32;
 
         chips.forEach((chip) => {
-            const chipWidth = 200;
-            if (totalWidth + chipWidth <= containerWidth - ellipsisWidth) {
-                totalWidth += chipWidth;
+            if (totalWidth + chipsWidth <= containerWidth - ellipsisWidth) {
+                totalWidth += chipsWidth;
                 count++;
             }
         });
@@ -59,43 +59,22 @@ const ChipList = (props: ChipListProps) => {
                     label={chip.label}
                     selected={selectedId === chip.id}
                     onClick={() => onSelect(chip.id)}
-                    width={200}
+                    width={chipsWidth}
                 />
             ))}
-            {hiddenChips.length > 0 && (
-                <div
-                    ref={ellipsisRef}
-                    className={cls.ellipsis}
-                    onClick={() => setIsPopupOpen(true)}
-                >
-                    ...
-                </div>
-            )}
-            {isPopupOpen && (
-                <div
-                    ref={setPopperElement}
-                    className={classNames(cls.popup, {}, [popupClassName])}
-                    style={styles.popper}
-                    {...attributes.popper}
-                >
-                    <div
-                        className={cls.grid}
-                        style={{ gridTemplateColumns: `repeat(${gridColumns}, 1fr)` }}
-                    >
-                        {hiddenChips.map((chip) => (
-                            <Chips
-                                key={chip.id}
-                                label={chip.label}
-                                selected={selectedId === chip.id}
-                                onClick={() => {
-                                    onSelect(chip.id);
-                                    setIsPopupOpen(false);
-                                }}
-                            />
-                        ))}
-                    </div>
-                </div>
-            )}
+            <Popup
+                trigger={<Button className={cls.popupButton}>...</Button>}
+                onClose={() => setIsPopupOpen(false)}
+            >
+                {hiddenChips.map((chip) => (
+                    <Chips
+                        key={chip.id}
+                        label={chip.label}
+                        selected={selectedId === chip.id}
+                        onClick={() => onSelect(chip.id)}
+                    />
+                ))}
+            </Popup>
         </div>
     );
 };
