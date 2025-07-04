@@ -6,14 +6,17 @@ interface ChipsProps {
     selected: boolean;
     onClick: () => void;
     className?: string;
+    width?: number;
 }
 
 const Chips = (props: ChipsProps) => {
-    const { label, selected, onClick, className } = props;
+    const { label, selected, onClick, className, width } = props;
+    const style = width ? { width: `${width}px` } : {};
     return (
         <div
             className={classNames(cls.Chip, { [cls.selected]: selected }, [className])}
             onClick={onClick}
+            style={style}
         >
             {label}
         </div>
